@@ -1,0 +1,45 @@
+[tool.poetry]
+name = "azuretools"
+version = "0.1.0"
+description = "Tools for interacting with Azure resources from the CFA VAP, with a focus on short-term forecasting using batch"
+authors = ["Dylan H. Morris <dzl1@cdc.gov>"]
+license = "Apache 2.0 License"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+toml = "^0.10.2"
+azure-mgmt-batch = "^18.0.0"
+azure-storage-blob = "^12.23.1"
+azure-identity = "^1.18.0"
+msrest = "^0.7.1"
+msrestazure = "^0.6.4.post1"
+azure-keyvault = "^4.2.0"
+azure-mgmt-compute = "^33.0.0"
+azure-batch = "^14.2.0"
+sphinx-autoapi = "^3.3.3"
+
+
+[tool.poetry.group.docs.dependencies]
+sphinx = "^8.0.2"
+pydata-sphinx-theme = "^0.15.4"
+myst-parser = "^4.0.0"
+polars = "^1.12.0"
+
+
+[tool.poetry.group.test.dependencies]
+pytest = "^8.3.3"
+
+[tool.numpydoc_validation]
+checks = [
+    "all",   # report on all checks, except the below
+    "EX01",  # do not require examples
+    "SA01",  # do not require see also
+    "SS06",  # do not require summaries to be a single line
+    "PR04",  # do not require types in docstrings, since we defer to typehints
+    "ES01",  # do not require extended summary
+]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
