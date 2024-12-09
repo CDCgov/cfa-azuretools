@@ -11,8 +11,8 @@ python --version
 which pip
 ```
 
-Provided you are authenticated to `cdcent` at the command line, you can install `azuretools` from Github via:
+You can install `azuretools` from Github via:
 
 ```bash
-pip install git+https://github.com/cdcent/cfa-stf-azuretools
+pip install git+https://github.com/cdcent/cfa-azuretools
 ```
