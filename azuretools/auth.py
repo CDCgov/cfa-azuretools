@@ -79,7 +79,7 @@ class CredentialHandler:
             attr_val = getattr(self, attr)
             if attr_val is None:
                 err_msg = (
-                    f"A non-None value for attribute {attr} " "is required "
+                    f"A non-None value for attribute {attr} is required "
                 ) + (
                     f"to obtain a value for {goal}."
                     if goal is not None
@@ -283,7 +283,7 @@ class CredentialHandler:
                 "azure_container_registry_domain",
                 "azure_user_assigned_identity",
             ],
-            goal=("Azure Container Registry " "`ContainerRegistry` instance"),
+            goal=("Azure Container Registry `ContainerRegistry` instance"),
         )
 
         server = f"https://{self.azure_container_registry_endpoint}"
