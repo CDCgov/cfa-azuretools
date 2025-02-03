@@ -137,3 +137,30 @@ def get_default_pool_config(
         ),
         **{**default_pool_config_dict, **kwargs},
     )
+
+
+def assign_container_config(
+    pool_config: models.Pool, container_config: models.ContainerConfiguration
+) -> models.Pool:
+    """
+    Assign a container configuration to a models.Pool object
+    (in place).
+
+    Parameters
+    ----------
+    pool_config
+        :class:`models.Pool` configuration object to modify.
+
+    container_config
+        :class:`models.ContainerConfiguration` object to
+        add to the :class:`models.Pool` configuration object.
+
+    Returns
+    -------
+    models.Pool
+        The modified :class:`models.Pool` object.
+    """
+    (
+        pool_config.deployment_configuration.virtual_machine_configuration.container_configuration
+    ) = container_config
+    return pool_config
