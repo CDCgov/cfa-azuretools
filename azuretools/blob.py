@@ -100,7 +100,7 @@ def upload_to_storage_container(
 
     for i_file, file_path in enumerate(file_paths):
         if i_file % (1 + int(n_total_files / 10)) == 0:
-            print("Uploading file {} of {}" "".format(i_file, n_total_files))
+            print("Uploading file {} of {}".format(i_file, n_total_files))
 
         local_file_path = os.path.join(local_root_dir, file_path)
         remote_file_path = os.path.join(remote_root_dir, file_path)
@@ -111,9 +111,7 @@ def upload_to_storage_container(
         with open(local_file_path, "rb") as upload_data:
             blob_client.upload_blob(upload_data, overwrite=True)
 
-    print(
-        "Uploaded {} files to blob storage container" "".format(n_total_files)
-    )
+    print("Uploaded {} files to blob storage container".format(n_total_files))
 
 
 def download_from_storage_container(

@@ -2,7 +2,7 @@ repos:
   #####
   # Basic file cleanliness
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.5.0
+    rev: v5.0.0
     hooks:
       - id: check-added-large-files
       - id: check-yaml
@@ -13,7 +13,7 @@ repos:
   #####
   # Python
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.6.8
+    rev: v0.9.4
     hooks:
       - name: ruff sort imports
         id: ruff
@@ -23,14 +23,14 @@ repos:
       - id: ruff-format
         args: ["--line-length", "79"]
   - repo: https://github.com/numpy/numpydoc
-    rev: v1.7.0
+    rev: v1.8.0
     hooks:
       - id: numpydoc-validation
         exclude: "^test|^examples|^docs/source/conf.py"
 
   # Secrets
   - repo: https://github.com/Yelp/detect-secrets
-    rev: v1.4.0
+    rev: v1.5.0
     hooks:
       - id: detect-secrets
         args: ["--baseline", ".secrets.baseline"]
@@ -38,7 +38,7 @@ repos:
   ####
   # Typos
   - repo: https://github.com/crate-ci/typos
-    rev: v1.20.0
+    rev: typos-dict-v0.12.4
     hooks:
       - id: typos
         args: ["--force-exclude"]

@@ -30,8 +30,7 @@ def test_get_var_errors():
         with pytest.raises(
             ValueError,
             match=(
-                "(?=.*value for 'variable two')"
-                "(?=.*under the key 'var_two')"
+                "(?=.*value for 'variable two')(?=.*under the key 'var_two')"
             ),
         ):
             config.get_config_val(
