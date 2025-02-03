@@ -31,7 +31,7 @@ default_vm_configuration = models.VirtualMachineConfiguration(
     node_agent_sku_id=default_node_agent_sku_id,
 )
 
-default_vm_size = "STANDARD_D4ds_V4"  # 4 core D-series VM
+default_vm_size = "STANDARD_D4ds_V5"  # 4 core D-series VM
 
 default_autoscale_evaluation_interval = "PT5M"
 
@@ -121,7 +121,8 @@ def get_default_pool_config(
 
     **kwargs
         Additional keyword arguments passed to the
-        :class:`models.Pool` constructor.
+        :class:`models.Pool` constructor, potentially
+        overriding settings from ``default_pool_config_dict``.
 
     Returns
     -------
@@ -134,6 +135,6 @@ def get_default_pool_config(
         network_configuration=models.NetworkConfiguration(
             subnet_id=subnet_id, **default_network_config_dict
         ),
-        **default_pool_config_dict,
-        **kwargs,
+        **{**default_pool_config_dict,
+           **kwargs}
     )
