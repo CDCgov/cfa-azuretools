@@ -16,3 +16,9 @@ You can install `azuretools` from Github via:
 ```bash
 pip install git+https://github.com/cdcent/cfa-azuretools
 ```
+
+## Projects that use `azuretools`
+One way to get a sense of `azuretools` is to look at projects that use it. Here are a few:
+- [Pyrenew-HEW](https://github.com/cdcgov/pyrenew-hew): most relevant python scripts live in the [`pipelines/batch`](https://github.com/CDCgov/pyrenew-hew/tree/main/pipelines/batch) subdirectory
+- Coming soon: [wastewater-informed-covid-forecasting](https://github.com/cdcgov/wastewater-informed-covid-forecasting): currently [getting refactored to `azuretools`](https://github.com/CDCgov/wastewater-informed-covid-forecasting/pull/230)
+Let us know if you have a project that uses `azuretools` that you'd like us to showcase here.
