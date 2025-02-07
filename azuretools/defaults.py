@@ -31,7 +31,8 @@ default_vm_configuration = models.VirtualMachineConfiguration(
     node_agent_sku_id=default_node_agent_sku_id,
 )
 
-default_vm_size = "STANDARD_D4ds_V5"  # 4 core D-series VM
+
+default_vm_size = "standard_d4s_v3"  # 4 core D-series VM
 
 default_autoscale_evaluation_interval = "PT5M"
 
