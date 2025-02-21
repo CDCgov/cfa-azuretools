@@ -24,7 +24,8 @@ One way to get a sense of `azuretools` is to look at projects that use it. Here 
 - Most relevant python scripts live in the [`pipelines/batch`](https://github.com/CDCgov/pyrenew-hew/tree/main/pipelines/batch) subdirectory
 
 #### [Wastewater-informed COVID Forecasting](https://github.com/cdcgov/wastewater-informed-covid-forecasting)
-- Currently [getting refactored to use `azuretools`](https://github.com/CDCgov/wastewater-informed-covid-forecasting/pull/230)
+- Relevant scripts live in the [`batch`](https://github.com/CDCgov/wastewater-informed-covid-forecasting/tree/prod/batch) subdirectory
+- That directory's [README](https://github.com/CDCgov/wastewater-informed-covid-forecasting/blob/prod/batch/README.md) walks the user through running an analysis on Azure batch (leverging `azuretools`).
 
 ### Your project?
 - Let us know if you have a project that uses `azuretools` that you'd like us to showcase here.
