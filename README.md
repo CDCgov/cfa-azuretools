@@ -14,7 +14,7 @@ which pip
 You can install `azuretools` from Github via:
 
 ```bash
-pip install git+https://github.com/cdcent/cfa-azuretools
+pip install git+https://github.com/cdcgov/cfa-azuretools
 ```
 
 ## Projects that use `azuretools`
