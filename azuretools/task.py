@@ -125,6 +125,7 @@ def get_task_config(
     base_call: str,
     container_settings: TaskContainerSettings = None,
     user_identity: UserIdentity = None,
+    **kwargs,
 ) -> None:
     """
     Create a batch task with a given base call
@@ -147,10 +148,14 @@ def get_task_config(
         the create_container_settings helper function
         to create a valid entry. Default ``None``.
 
-    user_identity : UserIdentity
+    user_identity
         User identity under which to run the task.
         If ``None``, create one automatically with admin
         privileges, if permitted. Default ``None``.
+
+    **kwargs
+        Additional keyword arguments passed to the
+        :class:`TaskAddParameter` constructor.
 
     Returns
     -------
@@ -169,6 +174,7 @@ def get_task_config(
         command_line=base_call,
         container_settings=container_settings,
         user_identity=user_identity,
+        **kwargs,
     )
 
     return task_config
