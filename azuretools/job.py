@@ -14,7 +14,7 @@ def create_job_if_not_exists(
     """
     Create an Azure Batch job if it does
     not already exist, returning ``True``
-    if the job was created and ``False`` if the 
+    if the job was created and ``False`` if the
     job already existed.
 
     Parameters
