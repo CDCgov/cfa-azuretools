@@ -104,7 +104,7 @@ def test_get_task_config_auto_log():
     assert len(task_config.output_files) == 1
     outfile = task_config.output_files[0]
     assert isinstance(outfile, OutputFile)
-    assert outfile.file_pattern == "std*.txt"
+    assert outfile.file_pattern == "../std*.txt"
     destination = outfile.destination
     assert isinstance(destination, OutputFileDestination)
     assert isinstance(
