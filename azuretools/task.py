@@ -290,7 +290,7 @@ def get_task_config(
 
     log_blob_account
         Azure Blob storage account in which to look for the
-        storage container specified in ``log_blob_container.
+        storage container specified in ``log_blob_container``.
         Ignored if ``log_blob_container`` is ``None``.
         Default ``None``.
 
@@ -299,7 +299,7 @@ def get_task_config(
         given in ``log_blob_storage_container` in which to save
         the log ``.txt`` files. If ``None``, save at the
         root of the Blob storage container. Ignored if
-       ``log_blob_container`` is ``None``.
+        ``log_blob_container`` is ``None``.
 
     log_file_pattern
         File pattern for logs to persist. Default ``std*.txt``,
