@@ -248,7 +248,7 @@ def get_task_config(
     log_blob_container: str = None,
     log_blob_account: str = None,
     log_subdir: str = None,
-    log_file_pattern: str = "std*.txt",
+    log_file_pattern: str = "../std*.txt",
     log_upload_condition: str = "taskCompletion",
     log_compute_node_identity_reference: ComputeNodeIdentityReference = None,
     output_files: list[OutputFile] | OutputFile = None,
@@ -302,9 +302,10 @@ def get_task_config(
         ``log_blob_container`` is ``None``.
 
     log_file_pattern
-        File pattern for logs to persist. Default ``"std*.txt"``,
+        File pattern for logs to persist. Default ``"../std*.txt"``,
         which matches the ``.txt`` output files for the
-        stdout and stderr buffers in a standard Azure Batch task.
+        stdout and stderr buffers in a standard Azure Batch task,
+        which are stored one directory up from the task working directory.
         Ignored if ``log_blob_container`` is ``None``.
 
     log_upload_condition
