@@ -40,7 +40,7 @@ def create_bind_mount_string(
         or volumes to mount.
 
     source_path
-        Path relative to az_mount_dir to use as the source.
+        Path relative to ``az_mount_dir`` to use as the source.
 
     target_path
         Absolute path within the container to bind to
@@ -152,7 +152,7 @@ def output_task_files_to_blob(
     ----------
     file_pattern
         File pattern to match when uploading. Passed as the
-        file_pattern argument to :class:`OutputFile`.
+        ``file_pattern`` argument to :class:`OutputFile`.
 
     blob_container
         Name of the Azuue blob storage container to which
@@ -172,27 +172,27 @@ def output_task_files_to_blob(
         with their original filenames and extensions.
         If ``file_pattern`` contains no wildcards, ``path`` is
         treated as the full file path including filename and extension
-        (i.e. the file is renamed). See the
-        :class:`OutputFileBlobContainerDestination` for details.
+        (i.e. the file is renamed). See
+        :class:`~azure.batch.models.OutputFileBlobContainerDestination` for details.
 
     upload_condition
         Condition under which to upload the file(s). Options are
         ``"taskCompletion"`` (always upload, the default),
-        ``"taskFailure", (upload only for failed tasks),
-        and "taskSuccess" (upload only for successful tasks).
+        ``"taskFailure"``, (upload only for failed tasks),
+        and ``"taskSuccess"`` (upload only for successful tasks).
         Passed as the ``upload_condition`` argument to
         :class:`OutputFileUploadOptions`.
 
     blob_endpoint_subdomain
         Azure Blob endpoint subdomains and domains
         that follow the account name. If ``None`` (default), use the
-        :obj:`d.default_azure_blob_storage_endpoint_subdomain``.
+        :obj:`d.default_azure_blob_storage_endpoint_subdomain`.
 
     compute_node_identity_reference
         :class:`ComputeNodeIdentityReference` to use when constructing
         a :class:`OutputFileBlobContainerDestination` object for logging.
         If ``None`` (default), attempt to obtain one via
-        :fun:`get_compute_node_identity_reference()`.
+        :func:`get_compute_node_identity_reference`.
 
     **kwargs
         Additional keyword arguments passed to the
@@ -202,7 +202,7 @@ def output_task_files_to_blob(
     -------
     OutputFile
         An `OutputFile` object that can be used in constructing a
-        batch task via :fun:`get_task_config`.
+        batch task via :func:`get_task_config`.
 
     Raises
     ------
@@ -319,7 +319,7 @@ def get_task_config(
         :class:`ComputeNodeIdentityReference` to use when constructing
         a :class:`OutputFileBlobContainerDestination` object for logging.
         If ``None``, attempt to obtain one via
-        :fun:`get_compute_node_identity_reference()` Default ``None``.
+        :func:`get_compute_node_identity_reference()` Default ``None``.
         Ignored if ``log_blob_container`` is ``None``.
 
     output_files
