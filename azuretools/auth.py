@@ -14,6 +14,8 @@ from azure.identity import (
 )
 from azure.keyvault.secrets import SecretClient
 
+import azuretools.defaults as d
+import azuretools.endpoint as endpoint
 from azuretools.config import get_config_val
 from azuretools.util import ensure_listlike
 from azuretools.validate import is_valid_acr_endpoint
@@ -37,15 +39,21 @@ class CredentialHandler:
     azure_keyvault_sp_secret_id: str = None
     azure_tenant_id: str = None
     azure_sp_client_id: str = None
-    azure_batch_endpoint_subdomain: str = "batch.azure.com/"
+    azure_batch_endpoint_subdomain: str = (
+        d.default_azure_batch_endpoint_subdomain
+    )
     azure_batch_account: str = None
     azure_batch_location: str = None
-    azure_batch_resource_url: str = "https://batch.core.windows.net/"
-    azure_blob_storage_endpoint_subdomain: str = "blob.core.windows.net/"
+    azure_batch_resource_url: str = d.default_azure_batch_resource_url
+    azure_blob_storage_endpoint_subdomain: str = (
+        d.default_azure_blob_storage_endpoint_subdomain
+    )
     azure_blob_storage_account: str = None
 
     azure_container_registry_account: str = None
-    azure_container_registry_domain: str = "azurecr.io"
+    azure_container_registry_domain: str = (
+        d.default_azure_container_registry_domain
+    )
 
     def require_attr(self, attributes: str | list[str], goal: str = None):
         """
@@ -107,10 +115,10 @@ class CredentialHandler:
             ],
             goal="Azure batch endpoint URL",
         )
-        return (
-            f"https://{self.azure_batch_account}."
-            f"{self.azure_batch_location}."
-            f"{self.azure_batch_endpoint_subdomain}"
+        return endpoint.construct_batch_endpoint(
+            self.azure_batch_account,
+            self.azure_batch_location,
+            self.azure_batch_endpoint_subdomain,
         )
 
     @property
@@ -132,9 +140,9 @@ class CredentialHandler:
             ],
             goal="Azure blob storage endpoint URL",
         )
-        return (
-            f"https://{self.azure_blob_storage_account}."
-            f"{self.azure_blob_storage_endpoint_subdomain}"
+        return endpoint.construct_blob_account_endpoint(
+            self.azure_blob_storage_account,
+            self.azure_blob_storage_endpoint_subdomain,
         )
 
     @property
@@ -142,7 +150,7 @@ class CredentialHandler:
         """
         Azure container registry endpoint URL.
         Constructed programmatically from the account name
-        and endpoint subdomain.
+        and registry domain.
 
         Returns
         -------
@@ -156,9 +164,9 @@ class CredentialHandler:
             ],
             goal="Azure container registry endpoint URL",
         )
-        return (
-            f"{self.azure_container_registry_account}."
-            f"{self.azure_container_registry_domain}"
+        return endpoint.construct_azure_container_registry_endpoint(
+            self.azure_container_registry_account,
+            self.azure_container_registry_domain,
         )
 
     @cached_property
@@ -286,15 +294,15 @@ class CredentialHandler:
             goal=("Azure Container Registry `ContainerRegistry` instance"),
         )
 
-        server = f"https://{self.azure_container_registry_endpoint}"
-
-        valid, msg = is_valid_acr_endpoint(server)
+        valid, msg = is_valid_acr_endpoint(
+            self.azure_container_registry_endpoint
+        )
         if not valid:
             raise ValueError(msg)
 
         return models.ContainerRegistry(
             user_name=self.azure_container_registry_account,
-            registry_server=server,
+            registry_server=self.azure_container_registry_endpoint,
             identity_reference=self.compute_node_identity_reference,
         )
 
@@ -421,7 +429,7 @@ def get_service_principal_credentials(
     vault_sp_secret_id: str,
     tenant_id: str,
     application_id: str,
-    resource_url: str = "https://batch.core.windows.net/",
+    resource_url: str = d.default_azure_batch_resource_url,
     user_credential: ChainedTokenCredential = None,
 ) -> ServicePrincipalCredentials:
     """
@@ -439,7 +447,7 @@ def get_service_principal_credentials(
        Application ID for the service principal credential.
     resource_url
        URL of the Azure resource. Default
-       ``https://batch.core.windows.net/``.
+       :obj:``d.default_azure_batch_resource_url``.
     user_credential
        User credential for the Azure user, as an
        azure-identity UserCredential class instance.
@@ -468,27 +476,26 @@ def get_service_principal_credentials(
     return sp_credential
 
 
-def get_compute_node_id_reference(
-    config_dict: dict = None,
-    try_env: bool = True,
+def get_compute_node_identity_reference(
+    credential_handler: CredentialHandler = None,
 ) -> models.ComputeNodeIdentityReference:
     """
-    Get a valid :class:`models.ComputeNodeIdentityReference` value
-    by querying the provided configuration dictionary or the
-    available environment variables.
+    Get a valid :class:`models.ComputeNodeIdentityReference` using
+    credentials obtained via a :class:`CredentialHandler`:
+    either a user-provided one or a default based on
+    environment variables.
 
     Parameters
     ----------
-    config_dict
-       Configuration dictionary in which to look
-       for relevant keys. Passed to
-       :func:`get_config_val`. Default ``None``.
-
-    try_env
-       Look for configuration keys in the
-       environment variables if they are not
-       available in the config_dict? Passed
-       to :func:`get_config_val`. Default ``True``.
+    credential_handler
+       Credential handler for connecting and
+       authenticating to Azure resources.
+       If ``None``, create a blank
+       :class:`EnvCredentialHandler`, which
+       attempts to obtain needed credentials
+       using information available in local
+       environment variables (see its documentation
+       for details).
 
     Returns
     -------
@@ -496,8 +503,8 @@ def get_compute_node_id_reference(
         A :class:`models.ComputeNodeIdentityReference`
         created according to the specified configuration.
     """
-    return models.ComputeNodeIdentityReference(
-        resource_id=get_config_val(
-            "azure_user_assigned_identity", config_dict=config_dict
-        )
-    )
+    ch = credential_handler
+    if ch is None:
+        ch = EnvCredentialHandler()
+
+    return ch.compute_node_identity_reference
