@@ -296,7 +296,7 @@ def get_task_config(
 
     log_subdir
         Subdirectory of the Blob storage container
-        given in ``log_blob_storage_container`` in which to save
+        given in ``log_blob_container`` in which to save
         the log ``.txt`` files. If ``None``, save at the
         root of the Blob storage container. Ignored if
         ``log_blob_container`` is ``None``.
