@@ -63,7 +63,7 @@ def upload_to_storage_container(
     file_paths
         File or list of files to upload,
         as string paths relative to
-        local_upload_dir. A single string
+        ``local_upload_dir``. A single string
         will be coerced to a length-one list.
 
     blob_storage_container_name
@@ -71,17 +71,17 @@ def upload_to_storage_container(
         to upload the files. Must already exist.
 
     blob_service_client
-        BlobServiceClient to use when uploading.
+        :class:`BlobServiceClient` to use when uploading.
 
     local_root_dir
         Root directory for the relative file paths
-        in local storage. Default "." (use the
+        in local storage. Default ``"."`` (use the
         local working directory).
 
     remote_root_dir
         Root directory for the relative file paths
         within the blob storage container.
-        Default "." (start at the blob storage
+        Default ``"."`` (start at the blob storage
         container root).
 
     Returns
@@ -131,7 +131,7 @@ def download_from_storage_container(
     file_paths
         File or list of files to upload,
         as string paths relative to
-        local_upload_dir. A single string
+        ``local_upload_dir``. A single string
         will be coerced to a length-one list.
 
     blob_storage_container_name
@@ -139,25 +139,25 @@ def download_from_storage_container(
         to download the files. Must already exist.
 
     blob_service_client
-        BlobServiceClient to use when downloading.
+        :class:`BlobServiceClient` to use when downloading.
         If ``None``, attempt to create one via
-        :func:`get_blob_service_client` using provided
-        **kwargs, if any. Default ``None``.
+        :func:`client.get_blob_service_client` using provided
+        ``**kwargs``, if any. Default ``None``.
 
     local_root_dir
         Root directory for the relative file paths
-        in local storage. Default "." (use the
+        in local storage. Default ``"."`` (use the
         local working directory).
 
     remote_root_dir
         Root directory for the relative file paths
         within the blob storage container.
-        Default "." (start at the blob storage
+        Default ``"."`` (start at the blob storage
         container root).
 
     **kwargs
        Keyword arguments passed to
-       :func:`get_blob_service_client`.
+       :func:`~client.get_blob_service_client`.
 
     Returns
     -------
@@ -248,7 +248,7 @@ def get_node_mount_config(
 
     **kwargs
         Additional keyword arguments passed to the
-        :class`models.AzureBlobFileSystemConfiguration`
+        :class:`models.AzureBlobFileSystemConfiguration`
         constructor.
 
     Returns

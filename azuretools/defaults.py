@@ -12,6 +12,11 @@ default_image_sku = "2204"
 default_node_agent_sku_id = "batch.node.ubuntu 22.04"
 
 
+default_azure_batch_resource_url = "https://batch.core.windows.net/"
+default_azure_batch_endpoint_subdomain = "batch.azure.com/"
+default_azure_blob_storage_endpoint_subdomain = "blob.core.windows.net/"
+default_azure_container_registry_domain = "azurecr.io"
+
 default_image_reference = models.ImageReference(
     publisher=default_image_publisher,
     offer=default_image_offer,
@@ -97,12 +102,11 @@ def get_default_pool_config(
     pool_name: str, subnet_id: str, user_assigned_identity: str, **kwargs
 ) -> models.Pool:
     """
-    Instantiate a models.Pool instance with
-    the given pool name and subnet id,
+    Instantiate a :class:`azure.mgmt.batch.models.Pool`
+    instance with the given pool name and subnet id,
     the default pool identity given by
-    :func:`get_default_pool_identity`,
-    and other defaults specified in
-    :obj:`default_pool_config_dict` and
+    :func:`get_default_pool_identity`, and other defaults
+    specified in :obj:`default_pool_config_dict` and
     :obj:`default_network_config_dict`.
 
     Parameters
@@ -123,12 +127,12 @@ def get_default_pool_config(
     **kwargs
         Additional keyword arguments passed to the
         :class:`models.Pool` constructor, potentially
-        overriding settings from ``default_pool_config_dict``.
+        overriding settings from :obj:`default_pool_config_dict`.
 
     Returns
     -------
     models.Pool
-       The instantiated models.Pool instance.
+       The instantiated :class:`models.Pool` object.
     """
     return models.Pool(
         identity=get_default_pool_identity(user_assigned_identity),

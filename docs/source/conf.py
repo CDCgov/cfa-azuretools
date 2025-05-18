@@ -23,6 +23,8 @@ autoapi_dirs = ["../../azuretools"]
 
 myst_enable_extensions = ["amsmath", "dollarmath"]
 
+add_module_names = False
+
 intersphinx_mapping = {
     "python": ("https://docs.python.org/3/", None),
     "msrestazure": ("https://msrestazure.readthedocs.io/en/latest/", None),

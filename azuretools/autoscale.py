@@ -17,8 +17,8 @@ def remaining_task_autoscale_formula(
     evaluation_interval
         How often to evaluate the formula, as a
         `Java-style duration string
-        <https://docs.oracle.com/javase/8/docs/api/java/time/Duration.html#parse-java.lang.CharSequence->`_  # noqa
-        Default "PT5M": every 5 minutes.
+        <https://docs.oracle.com/javase/8/docs/api/java/time/Duration.html#parse-java.lang.CharSequence->`_.
+        Default ``"PT5M"``: every 5 minutes.
 
     task_sample_interval_minutes
         Task sampling interval, in minutes, as an integer.

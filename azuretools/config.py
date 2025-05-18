@@ -30,7 +30,7 @@ def try_get_val_from_dict(
     value_name
         Descriptive name for the configuration value,
         to allow more readable failure messages
-        when the ``key``cannot be found in ``config_dict``.
+        when the ``key`` cannot be found in ``config_dict``.
         If ``None``, use the value of ``key``.
         Default ``None``.
 
@@ -82,7 +82,7 @@ def try_get_val_from_env(
         readable failure messages when the
         ``env_variable_name`` cannot be
         located. If ``None``, use the value of
-       ``env_variable_name``. Default ``None``.
+        ``env_variable_name``. Default ``None``.
 
     Returns
     -------
