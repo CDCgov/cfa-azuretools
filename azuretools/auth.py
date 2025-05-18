@@ -231,7 +231,8 @@ class CredentialHandler:
     @cached_property
     def client_secret_sp_credential(self):
         """
-        A client secret credential created using ``self.service_principal_secret``.
+        A client secret credential created using
+        :obj:`self.service_principal_secret`.
 
         Returns
         -------
@@ -322,7 +323,7 @@ class EnvCredentialHandler(CredentialHandler):
         Keyword arguments defining additional attributes
         or overriding those set in the environment variables.
         Passed as the ``config_dict`` argument to
-        :func:`get_config_val`.
+        :func:`config.get_config_val`.
     """
 
     def __init__(self, **kwargs) -> None:
@@ -401,10 +402,9 @@ def get_client_secret_sp_credential(
        User credential for the Azure user, as an
        azure-identity UserCredential class instance.
        Passed to :func:`get_sp_secret`.
-       If None, get_sp_secret() will attempt to use a
-       :class:`ChainedTokenCredential` instantiated at runtime.
-       See its documentation for more.
-       Default ``None``.
+       If ``None`` (default), :func:`get_sp_secret` will attempt
+       to use a :class:`ChainedTokenCredential` instantiated at
+       runtime. See its documentation for more.
 
     Returns
     -------
@@ -446,8 +446,8 @@ def get_service_principal_credentials(
     application_id
        Application ID for the service principal credential.
     resource_url
-       URL of the Azure resource. Default
-       :obj:``d.default_azure_batch_resource_url``.
+       URL of the Azure resource. Defaults to the value of
+       :obj:`~defaults.default_azure_batch_resource_url`.
     user_credential
        User credential for the Azure user, as an
        azure-identity UserCredential class instance.

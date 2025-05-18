@@ -10,15 +10,17 @@ import azuretools.defaults as d
 def _construct_https_url(netloc: str, path: str = "") -> str:
     """
     Construct a simple https URL via
-    :fun:`urlunparse`.
+    :func:`urllib.parse.urlunparse`.
 
     Parameters
     ----------
     netloc
-        ``netloc`` value for :fun:`urlunparse` (subdomains and domain).
+        ``netloc`` value for :func:`~urllib.parse.urlunparse`
+        (subdomains and domain).
 
     path
-        ``path`` value for :fun:`urlunparse` (path after the domain).
+        ``path`` value for :func:`~urllib.parse.urlunparse`
+        (path after the domain).
 
     Returns
     -------

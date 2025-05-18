@@ -53,8 +53,8 @@ def ensure_listlike(x: any) -> MutableSequence:
     Useful for handling list-of-strings inputs
     alongside single strings.
 
-    Based on this _`StackOverflow approach
-    <https://stackoverflow.com/a/66485952>`.
+    Based on this `StackOverflow approach
+    <https://stackoverflow.com/a/66485952>`_.
 
     Parameters
     ----------
@@ -66,6 +66,6 @@ def ensure_listlike(x: any) -> MutableSequence:
     MutableSequence
         ``x`` if ``x`` is a :class:`MutableSequence`
         otherwise ``[x]`` (i.e. a one-item list containing
-        ``x``.
+        ``x``).
     """
     return x if isinstance(x, MutableSequence) else [x]

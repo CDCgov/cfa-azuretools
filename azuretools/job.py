@@ -24,7 +24,7 @@ def create_job_if_not_exists(
         creating the job.
 
     job
-        :class:`JobAddParameter` instance defining
+        :class:`~azure.batch.models.JobAddParameter` instance defining
         the job to add.
 
     verbose
@@ -33,7 +33,7 @@ def create_job_if_not_exists(
 
     **kwargs
         Additional keyword arguments passed to
-        :meth:`BatchServiceClient.job.add`.
+        :meth:`azure.batch.BatchServiceClient.job.add`.
 
     Returns
     -------
