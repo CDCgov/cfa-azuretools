@@ -310,7 +310,7 @@ def get_task_config(
     log_upload_condition
         Condition under which to upload logs. Options are
         ``"taskCompletion"`` (always upload, the default),
-        ``"taskFailure", (upload only for failed tasks),
+        ``"taskFailure"``, (upload only for failed tasks),
         and "taskSuccess" (upload only for successful tasks).
         Passed as the ``upload_condition`` argument to
         :class:`OutputFileUploadOptions`.
