@@ -296,7 +296,7 @@ def get_task_config(
 
     log_subdir
         Subdirectory of the Blob storage container
-        given in ``log_blob_container`` in which to save
+        given in ``log_blob_storage_container`` in which to save
         the log ``.txt`` files. If ``None``, save at the
         root of the Blob storage container. Ignored if
         ``log_blob_container`` is ``None``.
@@ -304,7 +304,7 @@ def get_task_config(
     log_file_pattern
         File pattern for logs to persist. Default ``"../std*.txt"``,
         which matches the ``.txt`` output files for the
-        stdout and stderr buffers in a standard Azure Batch task,
+        stdout and stderr buffers in a standard Azure Batch Linux task,
         which are stored one directory up from the task working directory.
         Ignored if ``log_blob_container`` is ``None``.
 
