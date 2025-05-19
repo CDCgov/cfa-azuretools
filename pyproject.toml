@@ -18,6 +18,7 @@ azure-keyvault = "^4.2.0"
 azure-mgmt-compute = "^33.0.0"
 azure-batch = "^14.2.0"
 sphinx-autoapi = "^3.3.3"
+polars = "^1.29.0"
 
 
 [tool.poetry.group.docs.dependencies]

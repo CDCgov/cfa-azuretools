@@ -4,8 +4,9 @@ Functions for interacting with Azure Blob Storage.
 
 import os
 
+import polars as pl
 from azure.batch import models
-from azure.storage.blob import BlobServiceClient
+from azure.storage.blob import BlobServiceClient, ContainerClient
 
 from azuretools.client import get_blob_service_client
 from azuretools.util import ensure_listlike
@@ -346,3 +347,85 @@ def get_node_mount_config(
             identity_references,
         )
     ]
+
+
+def read_blob_parquet(
+    container_client: ContainerClient, blob_name: str
+) -> pl.DataFrame:
+    """
+    Read a parquet file from blob storage into memory as a polars DataFrame.
+
+    Parameters
+    ----------
+    container_client : ContainerClient
+        An instantiated client for the blob container, used to retrieve the blob.
+    blob_name : str
+        The name of the blob containing the parquet file.
+
+    Returns
+    -------
+    pl.DataFrame
+        A polars DataFrame containing the data read from the parquet file.
+
+    Notes
+    -----
+    This function downloads the complete blob and then reads the content using
+    polars' read_parquet().
+    """
+    return pl.read_parquet(
+        container_client.get_blob_client(blob_name).download_blob().readall()
+    )
+
+
+def read_blob_csv(
+    container_client: ContainerClient, blob_name: str, **kwargs
+) -> pl.DataFrame:
+    """
+    Read a CSV file from blob storage into memory as a polars DataFrame.
+
+    Parameters
+    ----------
+    container_client : ContainerClient
+        An instantiated client for the blob container, used to retrieve the blob.
+    blob_name : str
+        The name of the blob containing the CSV file.
+    **kwargs
+        Additional keyword arguments to pass to polars' read_csv() function. See list at
+        https://docs.pola.rs/api/python/stable/reference/api/polars.read_csv.html.
+
+    Returns
+    -------
+    pl.DataFrame
+        A polars DataFrame containing the data read from the blob CSV file.
+    """
+    return pl.read_csv(
+        container_client.get_blob_client(blob_name).download_blob().readall(),
+        **kwargs,
+    )
+
+
+def read_blob_json(
+    container_client: ContainerClient, blob_name: str, **kwargs
+) -> pl.DataFrame:
+    """
+    Read a JSON file from blob storage into memory as a polars DataFrame.
+
+    Parameters
+    ----------
+    container_client : ContainerClient
+        An instantiated client for the blob container, used to retrieve the blob.
+    blob_name : str
+        The name of the blob containing the JSON file.
+    **kwargs
+        Additional keyword arguments to pass to polars' read_json() function. See list at
+        https://docs.pola.rs/api/python/stable/reference/api/polars.read_json.html.
+
+    Returns
+    -------
+    pl.DataFrame
+        A polars DataFrame containing the data read from the blob JSON file.
+    """
+    return pl.read_json(
+        container_client.get_blob_client(blob_name).download_blob().readall(),
+        **kwargs,
+    )
