@@ -77,7 +77,7 @@ def create_job(
                 f"Attempt to create job {job.id} on "
                 f"pool {pool_id}, but could not find "
                 "the requested pool. Check that this "
-                "pool id is correct and that a pool"
+                "pool id is correct and that a pool "
                 "with that id exists"
             )
     try:
