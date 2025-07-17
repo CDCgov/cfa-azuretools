@@ -5,10 +5,7 @@ Batch autoscaling.
 
 
 def remaining_task_autoscale_formula(
-    evaluation_interval: str = "PT5M",
-    task_sample_interval_minutes: int = 15,
-    max_number_vms: int = 10,
-    task_type_to_count: str = "PendingTasks",
+    max_number_vms: int = 10, task_type_to_count: str = "PendingTasks"
 ):
     """
     Get an autoscaling formula that rescales pools based on the remaining task count
@@ -16,16 +13,6 @@ def remaining_task_autoscale_formula(
 
     Parameters
     ----------
-    evaluation_interval
-        How often to evaluate the formula, as a
-        `Java-style duration string
-        <https://docs.oracle.com/javase/8/docs/api/java/time/Duration.html#parse-java.lang.CharSequence->`_.
-        Default ``"PT5M"``: every 5 minutes.
-
-    task_sample_interval_minutes
-        Task sampling interval, in minutes, as an integer.
-        Default 15.
-
     max_number_vms
         Maximum number of virtual machines to spin
         up, regardless of the number of remaining
@@ -54,8 +41,8 @@ $TargetDedicatedNodes = max(0, min($targetVMs, cappedPoolSize));
 $NodeDeallocationOption = taskcompletion;
     """
     autoscale_formula = autoscale_formula_template.format(
-        task_sample_interval_minutes=task_sample_interval_minutes,
         max_number_vms=max_number_vms,
+        task_type_to_count=task_type_to_count,
     )
 
     return autoscale_formula
