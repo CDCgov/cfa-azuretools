@@ -1,4 +1,4 @@
-name: "azuretool website"
+name: "azuretools website"
 
 on:
   push:
