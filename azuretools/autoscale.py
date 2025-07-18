@@ -8,7 +8,7 @@ def remaining_task_autoscale_formula(
     max_number_vms: int = 10, task_type_to_count: str = "PendingTasks"
 ):
     """
-    Get an autoscaling formula that rescales pools based on the remaining task count
+    Get an autoscaling formula that rescales pools based on the remaining task count.
     and scales down to zero when no tasks remain.
 
     Parameters
