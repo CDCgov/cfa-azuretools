@@ -1,12 +1,10 @@
-name: website
+name: "azuretool website"
 
 on:
   push:
     branches: [main]
   pull_request:
-  release:
-    types: [published]
-
+  workflow_dispatch:
 
 jobs:
   build:
@@ -14,24 +12,25 @@ jobs:
     permissions:
       contents: read
     steps:
-    - uses: actions/checkout@v4
+    - name: "Checkout repository"
+      uses: "actions/checkout@v2"
 
-    - name: Set up Python
-      uses: actions/setup-python@v5
+    - name: "Install uv"
+      uses: "astral-sh/setup-uv@v6"
       with:
-        python-version: '3.13'
+        version: "0.7.21"
+        enable-cache: true
 
-    - name: Install Poetry
-      run: pip install poetry
+    - name: "Set up Python"
+      uses: "actions/setup-python@v5"
 
-    - name: Install dependencies with Poetry
-      run: poetry install --with docs
+    - name: "Install the project via uv"
+      run: "uv sync --locked --group docs"
 
-    # Building
-    - name: Build HTML using Poetry
+    - name: "Build HTML using uv"
       run: |
         cd docs
-        poetry run make html
+        uv run make html
 
     # Upload
     - name: Upload artifacts
@@ -42,38 +41,36 @@ jobs:
         path: docs/build/html/
 
   deploy:
-    # Deploy to the github-pages environment
-    # but not on PRs
-    if: ${{ github.event_name != 'pull_request' }}
-    needs: build
+    # Deploy to the github-pages environment on pushes to main only
+    if: ${{ github.event_name == 'push' && github.ref_name == 'main' }}
+    needs: "build"
     permissions:
-        id-token: write
-        pages: write
+        id-token: "write"
+        pages: "write"
     environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      name: "github-pages"
+      url: "${{ steps.deployment.outputs.page_url }}"
 
     # Specify runner + deployment step
     runs-on: ubuntu-latest
 
     steps:
-    - name: Deploy to GitHub Pages
-      id: deployment
-      uses: actions/deploy-pages@v4
+    - name: "Deploy to GitHub Pages"
+      uses: "actions/deploy-pages@v4"
       with:
-        artifact_name: github-pages
+        artifact_name: "github-pages"
         preview: true
 
   post-page-artifact:
-    if: ${{ github.event_name == 'pull_request' }}
-    needs: build
-    runs-on: ubuntu-latest
+    if: "${{ github.event_name == 'pull_request' }}"
+    needs: "build"
+    runs-on: "ubuntu-latest"
     permissions:
-        pull-requests: write
-        actions: read
+        pull-requests: "write"
+        actions: "read"
     steps:
-      - name: Post comment preview
-        uses: CDCgov/cfa-actions/post-artifact@v1.0.0
+      - name: "Post comment preview"
+        uses: "CDCgov/cfa-actions/post-artifact@v1.0.0"
         with:
-          artifact-name: github-pages
-          gh-token: ${{ secrets.GITHUB_TOKEN}}
+          artifact-name: "github-pages"
+          gh-token: "${{ secrets.GITHUB_TOKEN}}"
