@@ -39,9 +39,7 @@ class CredentialHandler:
     azure_keyvault_sp_secret_id: str = None
     azure_tenant_id: str = None
     azure_sp_client_id: str = None
-    azure_batch_endpoint_subdomain: str = (
-        d.default_azure_batch_endpoint_subdomain
-    )
+    azure_batch_endpoint_subdomain: str = d.default_azure_batch_endpoint_subdomain
     azure_batch_account: str = None
     azure_batch_location: str = None
     azure_batch_resource_url: str = d.default_azure_batch_resource_url
@@ -51,9 +49,7 @@ class CredentialHandler:
     azure_blob_storage_account: str = None
 
     azure_container_registry_account: str = None
-    azure_container_registry_domain: str = (
-        d.default_azure_container_registry_domain
-    )
+    azure_container_registry_domain: str = d.default_azure_container_registry_domain
 
     def require_attr(self, attributes: str | list[str], goal: str = None):
         """
@@ -86,9 +82,7 @@ class CredentialHandler:
         for attr in attributes:
             attr_val = getattr(self, attr)
             if attr_val is None:
-                err_msg = (
-                    f"A non-None value for attribute {attr} is required "
-                ) + (
+                err_msg = (f"A non-None value for attribute {attr} is required ") + (
                     f"to obtain a value for {goal}."
                     if goal is not None
                     else "for this operation."
@@ -295,9 +289,7 @@ class CredentialHandler:
             goal=("Azure Container Registry `ContainerRegistry` instance"),
         )
 
-        valid, msg = is_valid_acr_endpoint(
-            self.azure_container_registry_endpoint
-        )
+        valid, msg = is_valid_acr_endpoint(self.azure_container_registry_endpoint)
         if not valid:
             raise ValueError(msg)
 
@@ -370,9 +362,7 @@ def get_sp_secret(
         credential_order = (AzureCliCredential(),)
         user_credential = ChainedTokenCredential(*credential_order)
 
-    secret_client = SecretClient(
-        vault_url=vault_url, credential=user_credential
-    )
+    secret_client = SecretClient(vault_url=vault_url, credential=user_credential)
     sp_secret = secret_client.get_secret(vault_sp_secret_id).value
 
     return sp_secret

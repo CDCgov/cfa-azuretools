@@ -32,9 +32,6 @@ def test_remaining_task_formula(task_type_to_count, max_number_vms):
 
 
 def test_remaining_task_formula_default():
-    assert (
-        remaining_task_autoscale_formula()
-        == autoscale_formula_template.format(
-            task_type_to_count="PendingTasks", max_number_vms=10
-        )
+    assert remaining_task_autoscale_formula() == autoscale_formula_template.format(
+        task_type_to_count="PendingTasks", max_number_vms=10
     )

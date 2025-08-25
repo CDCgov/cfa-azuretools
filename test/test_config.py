@@ -29,9 +29,7 @@ def test_get_var_errors():
             config.get_config_val("var_three", config_dict={"var_two": "val2"})
         with pytest.raises(
             ValueError,
-            match=(
-                "(?=.*value for 'variable two')(?=.*under the key 'var_two')"
-            ),
+            match=("(?=.*value for 'variable two')(?=.*under the key 'var_two')"),
         ):
             config.get_config_val(
                 "var_two",
@@ -53,15 +51,10 @@ def test_get_config_precedence():
     config_dict = {"var_one": "a val"}
     with mock.patch.dict(os.environ, mock_env_vars, clear=True):
         # dict value takes precedence given a match
-        assert (
-            config.get_config_val("var_one", config_dict=config_dict)
-            == "a val"
-        )
+        assert config.get_config_val("var_one", config_dict=config_dict) == "a val"
         # but we fall back on the environment variables
         # if no match
-        assert (
-            config.get_config_val("var_two", config_dict=config_dict) == "val2"
-        )
+        assert config.get_config_val("var_two", config_dict=config_dict) == "val2"
         # can use different keys for dict versus env
         assert (
             config.get_config_val(

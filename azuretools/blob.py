@@ -39,11 +39,7 @@ def create_storage_container_if_not_exists(
         container_client.create_container()
         print("Container [{}] created.".format(blob_storage_container_name))
     else:
-        print(
-            "Container [{}] already exists.".format(
-                blob_storage_container_name
-            )
-        )
+        print("Container [{}] already exists.".format(blob_storage_container_name))
 
 
 def upload_to_storage_container(
@@ -196,8 +192,7 @@ def get_node_mount_config(
     storage_containers: str | list[str],
     account_names: str | list[str],
     identity_references: (
-        models.ComputeNodeIdentityReference
-        | list[models.ComputeNodeIdentityReference]
+        models.ComputeNodeIdentityReference | list[models.ComputeNodeIdentityReference]
     ),
     shared_relative_mount_path: str = "",
     mount_names: list[str] = None,
