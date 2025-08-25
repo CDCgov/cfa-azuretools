@@ -48,10 +48,7 @@ def does_not_raise(*args, **kwargs):
             ["w", "x", "y", "z"],
             pytest.raises,
             ValueError,
-            (
-                "{n_mount_names} `mount_names` and "
-                "{n_containers} `storage_containers`."
-            ),
+            ("{n_mount_names} `mount_names` and {n_containers} `storage_containers`."),
         ],
         [
             ["a", "b", "c"],

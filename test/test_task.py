@@ -28,10 +28,7 @@ def test_get_task_config_no_custom_arguments():
     assert task_config.user_identity is not None
     assert isinstance(task_config.user_identity, UserIdentity)
     assert task_config.user_identity.auto_user.scope == AutoUserScope.pool
-    assert (
-        task_config.user_identity.auto_user.elevation_level
-        == ElevationLevel.admin
-    )
+    assert task_config.user_identity.auto_user.elevation_level == ElevationLevel.admin
 
 
 def test_get_task_config_with_custom_container_settings():
@@ -57,9 +54,7 @@ def test_get_task_config_with_custom_user_identity():
         )
     )
 
-    task_config = get_task_config(
-        task_id, base_call, user_identity=user_identity
-    )
+    task_config = get_task_config(task_id, base_call, user_identity=user_identity)
 
     assert isinstance(task_config, TaskAddParameter)
     assert task_config.id == task_id
@@ -107,9 +102,7 @@ def test_get_task_config_auto_log():
     assert outfile.file_pattern == "../std*.txt"
     destination = outfile.destination
     assert isinstance(destination, OutputFileDestination)
-    assert isinstance(
-        destination.container, OutputFileBlobContainerDestination
-    )
+    assert isinstance(destination.container, OutputFileBlobContainerDestination)
     assert (
         destination.container.container_url
         == f"https://{blob_account}.blob.core.windows.net/{blob_container}"

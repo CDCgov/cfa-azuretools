@@ -20,9 +20,7 @@ from azuretools.auth import CredentialHandler
         ["https://test.example.com", False, "azurecr"],
     ],
 )
-def test_is_valid_acr_endpoint(
-    endpoint, expected_bool, expected_message_snippet
-):
+def test_is_valid_acr_endpoint(endpoint, expected_bool, expected_message_snippet):
     result_bool, result_msg = v.is_valid_acr_endpoint(endpoint)
     assert result_bool is expected_bool
     if expected_message_snippet is None:
@@ -47,9 +45,7 @@ def test_is_valid_acr_endpoint(
         ["test", "example.com", pytest.raises(ValueError, match="azurecr.io")],
     ],
 )
-def test_cred_handler_uses_acr_endpoint_validation(
-    acr_account, acr_domain, context
-):
+def test_cred_handler_uses_acr_endpoint_validation(acr_account, acr_domain, context):
     creds = CredentialHandler(
         azure_container_registry_account=acr_account,
         azure_container_registry_domain=acr_domain,
