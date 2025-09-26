@@ -7,16 +7,16 @@ requires-python = ">3.12"
 readme = "README.md"
 license = "Apache-2.0"
 dependencies = [
-    "toml>=0.10.2,<0.11",
-    "azure-mgmt-batch>=18.0.0,<19",
-    "azure-storage-blob>=12.23.1,<13",
-    "azure-identity>=1.18.0,<2",
-    "msrest>=0.7.1,<0.8",
-    "msrestazure>=0.6.4.post1,<0.7",
-    "azure-keyvault>=4.2.0,<5",
-    "azure-mgmt-compute>=33.0.0,<34",
-    "azure-batch>=14.2.0,<15",
-    "sphinx-autoapi>=3.3.3,<4",
+    "toml>=0.10.2",
+    "azure-mgmt-batch>=18.0.0",
+    "azure-storage-blob>=12.23.1",
+    "azure-identity>=1.18.0",
+    "msrest>=0.7.1",
+    "msrestazure>=0.6.4.post1",
+    "azure-keyvault>=4.2.0",
+    "azure-mgmt-compute>=33.0.0",
+    "azure-batch>=14.2.0",
+    "sphinx-autoapi>=3.3.3",
 ]
 
 [dependency-groups]
