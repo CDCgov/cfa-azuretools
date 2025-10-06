@@ -13,7 +13,7 @@ repos:
   #####
   # Python
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.13.2
+    rev: v0.13.3
     hooks:
       # Run the linter
       - id: ruff-check
@@ -35,7 +35,7 @@ repos:
   ####
   # Typos
   - repo: https://github.com/crate-ci/typos
-    rev: v1
+    rev: v1.37.3
     hooks:
       - id: typos
         args: ["--force-exclude"]
