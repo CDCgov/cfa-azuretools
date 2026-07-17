@@ -1,3 +1,8 @@
+# Archived repository
+This project is no longer under active development. It has been superseded by the [`cfa-cloudops`](https://github.com/CDCgov/cfa-cloudops) project, which incorporates code and concepts from `azuretools` as low-level tooling but also provides a higher level API for certain cloud operations.
+
+The CFA Predict Short-Term Forecasting Team currently handles workflow orchestration in Azure via Dagster. See the [`cfa-dagster`](https://github.com/CDCgov/cfa-dagster) repo for CFA-specific helper tooling. The Team uses `cfa-cloudops` for lower-level cloud tasks.
+
 # STF Azure tools
 
 This repository contains `azuretools`, a lightweight Python library of helper tooling to enable CFA Predict Short-Term Forecasting team members interact more efficiently with Azure, particularly Azure Batch. It also contains some simple worked examples in the `examples/` directory.
